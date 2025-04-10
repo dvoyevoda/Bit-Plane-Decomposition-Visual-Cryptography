@@ -24,4 +24,18 @@ if len(img.shape) == 2:
     # Grayscale image
     plt.hist(img.ravel(), 256, [0, 256], color='black')
     plt.title('Grayscale Histogram')
-    plt.
+    plt.xlabel('Pixel Intensity')
+    plt.ylabel('Frequency')
+else:
+    # Color image - plot each channel
+    colors = ('b', 'g', 'r')
+    for i, color in enumerate(colors):
+        hist = cv2.calcHist([img], [i], None, [256], [0, 256])
+        plt.plot(hist, color=color)
+        plt.xlim([0, 256])
+    plt.title('RGB Histogram')
+    plt.xlabel('Pixel Intensity')
+    plt.ylabel('Frequency')
+
+plt.grid(True)
+plt.show()
